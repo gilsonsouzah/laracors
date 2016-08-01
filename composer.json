@@ -1,0 +1,21 @@
+{
+    "name": "gilsonsouza/lara-cors",
+    "description": "Laravel CORS Enable",
+    "type": "library",
+    "require": {
+        "php": "^5.5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gilson Fernandes Batista de Souza",
+            "email": "gilsonfernandesbatista@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LaraCors\\Cors\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
