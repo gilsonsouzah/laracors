@@ -16,7 +16,7 @@ ou manualmente no seu arquivo `composer.json`
 }
 ```
 
-### 2. Middlewares
+## 2. Middlewares
 Para utilizá-los é necessário registrá-los no seu arquivo app/Http/Kernel.php.
 
 ```php
@@ -26,7 +26,7 @@ Para utilizá-los é necessário registrá-los no seu arquivo app/Http/Kernel.ph
  ];
 ```
 
-### 3. Provider (opcional)
+## 3. Provider (opcional)
 
 Selecionar os domínios permitidos no Laraver-Cors em sua aplicação Laravel, é necessário registrar o package no seu arquivo `config/app.php`. Adicione o seguinte código no fim da seção `providers`
 
@@ -39,7 +39,7 @@ Selecionar os domínios permitidos no Laraver-Cors em sua aplicação Laravel, �
 // file END ommited
 ```
 
-#### 3.1 Publicando o arquivo de configuração (somente se tiver feito o passo 3)
+### 3.1 Publicando o arquivo de configuração (somente se tiver feito o passo 3)
 
 Para publicar o arquivo de configuração padrão que acompanham o package, execute o seguinte comando:
 
@@ -48,13 +48,13 @@ php artisan vendor:publish  --provider="LaraCors\Cors\CorsServiceProvider"
 ```
 
 
-#### 4 Configurações (somente se tiver feito o passo 3, e 3.1)
+## 4 Configurações (somente se tiver feito o passo 3, e 3.1)
 
 Configure o arquivo com os domínios que dejeja liberar
 
 `config/cors.php`
 
-#### 5 Requisições Ajax
+## 5 Requisições Ajax
 Se estiver usando o guard do laravel e a autenticação via middleware (Authenticate), em suas requisições via ajax, adicione os seguintes parâmetros (nesse caso eu estou utilizando o ajax do jquery, mas utilize o método que preferir, somente lembre de adicionar os parâmetros conforme definidos no seu método)
 ```
 crossDomain : true,
@@ -80,7 +80,7 @@ $.ajax({
 });
 ```
 
-#### 6 Bônus
+## 6 Bônus
 
 Caso seu servidor seje apache, talvez seja necessário adicionar estas linhas abaixo ao .htaccess
 ```
