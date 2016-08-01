@@ -1,6 +1,6 @@
 {
     "name": "gilsonsouza/lara-cors",
-    "version": "master",
+    "version": "v1.0.0",
     "description": "Laravel CORS Enable",
     "require": {
         "php": "^5.5"
