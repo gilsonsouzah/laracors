@@ -23,7 +23,11 @@ class CorsMiddleware
             ->header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization, X-Requested-With, Origin');
     }
 
-    public function getPermission()
+    /**
+     * Get cors permissions on config file
+     * @return mixed
+     */
+    private function getPermission()
     {
         $allow = '';
         $permissions = Config::get('cors.permissions', ['*']);
