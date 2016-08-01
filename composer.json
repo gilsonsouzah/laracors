@@ -16,6 +16,5 @@
         "psr-4": {
             "LaraCors\\Cors\\": "src/"
         }
-    },
-    "minimum-stability": "dev-master"
+    }
 }
