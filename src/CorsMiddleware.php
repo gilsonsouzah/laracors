@@ -16,12 +16,15 @@ class CorsMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $allow = $this->getPermission();
+        $allowOrigin = $this->getPermission();
+        $allowedMethods = $this->getAllowedMethods();
+        $allowCredentials = $this->getCredentials();
+        $allowedHeaders = $this->getAllowedHeaders();
 
-        return $next($request)->header('Access-Control-Allow-Origin', $allow)
-            ->header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT, DELETE, PATCH, HEAD')
-            ->header('Access-Control-Allow-Credentials', 'true')
-            ->header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization, X-Requested-With, Origin, X-CSRF-Token');
+        return $next($request)->header('Access-Control-Allow-Origin', $allowOrigin)
+            ->header('Access-Control-Allow-Methods', $allowedMethods)
+            ->header('Access-Control-Allow-Credentials', $allowCredentials)
+            ->header('Access-Control-Allow-Headers', $allowedHeaders);
     }
 
     /**
@@ -30,7 +33,6 @@ class CorsMiddleware
      */
     private function getPermission()
     {
-        $allow = '';
         $permissions = Config::get('cors.permissions', ['']);
 
         if ($permissions == '*' || $permissions == ['*']) {
@@ -50,5 +52,38 @@ class CorsMiddleware
         }
 
         return '';
+    }
+
+    /**
+     * Get cors methods allowed on config file
+     * @return string String of allowed methods separated by comma.
+     */
+    private function getAllowedMethods()
+    {
+        $methods = Config::get('cors.allowedMethods', 'POST, GET, OPTIONS, PUT, DELETE');
+
+        return $methods;
+    }
+
+    /**
+     * Get cors headers allowed on config file
+     * @return string String of allowed headers separated by comma.
+     */
+    private function getAllowedHeaders()
+    {
+        $headers = Config::get('cors.allowedHeaders', 'Content-Type, Accept, Authorization, X-Requested-With, Origin, X-CSRF-Token');
+
+        return $headers;
+    }
+
+    /**
+     * Get cors authentication allowed on config file
+     * @return string State of authentication on cors
+     */
+    private function getCredentials()
+    {
+        $headers = Config::get('cors.allowCredentials', false);
+
+        return ($headers) ? 'true' : 'false';
     }
 }
