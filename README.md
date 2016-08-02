@@ -16,7 +16,7 @@ ou manualmente no seu arquivo `composer.json`
 }
 ```
 
-### 2. Middlewares
+## 2. Middlewares
 Para utilizá-los é necessário registrá-los no seu arquivo app/Http/Kernel.php.
 
 ```php
@@ -26,7 +26,7 @@ Para utilizá-los é necessário registrá-los no seu arquivo app/Http/Kernel.ph
  ];
 ```
 
-### 3. Provider (opcional)
+## 3. Provider (opcional)
 
 Selecionar os domínios permitidos no Laraver-Cors em sua aplicação Laravel, é necessário registrar o package no seu arquivo `config/app.php`. Adicione o seguinte código no fim da seção `providers`
 
@@ -39,7 +39,7 @@ Selecionar os domínios permitidos no Laraver-Cors em sua aplicação Laravel, �
 // file END ommited
 ```
 
-#### 3.1 Publicando o arquivo de configuração (somente se tiver feito o passo 3)
+### 3.1 Publicando o arquivo de configuração (somente se tiver feito o passo 3)
 
 Para publicar o arquivo de configuração padrão que acompanham o package, execute o seguinte comando:
 
@@ -48,45 +48,41 @@ php artisan vendor:publish  --provider="LaraCors\Cors\CorsServiceProvider"
 ```
 
 
-#### 4 Configurações (somente se tiver feito o passo 3, e 3.1)
+## 4 Configurações (somente se tiver feito o passo 3, e 3.1)
 
-configure o arquivo com os domínios que dejeja liberar
+Configure o arquivo com os domínios que dejeja liberar
 
 `config/cors.php`
 
-#### 5 Bônus
-
-Caso você utilize `nginx`
-
-Adicione estas configurações no arquivo de configurações do site:
+## 5 Requisições Ajax
+Se estiver usando o guard do laravel e a autenticação via middleware (Authenticate), em suas requisições via ajax, adicione os seguintes parâmetros (nesse caso eu estou utilizando o ajax do jquery, mas utilize o método que preferir, somente lembre de adicionar os parâmetros conforme definidos no seu método)
 ```
-	location / {
-		# First attempt to serve request as file, then
-		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ /$is_args$args;
-	     if ($request_method = 'OPTIONS') {
-	        add_header 'Access-Control-Allow-Origin' '*';
-	        #
-	        # Om nom nom cookies
-	        #
-	        add_header 'Access-Control-Allow-Credentials' 'true';
-	        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
-	        #
-	        # Custom headers and headers various browsers *should* be OK with but aren't
-	        #
-	        add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Authorization,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
-	        #
-	        # Tell client that this pre-flight info is valid for 20 days
-	        #
-	        add_header 'Access-Control-Max-Age' 1728000;
-	        add_header 'Content-Type' 'text/plain charset=UTF-8';
-	        add_header 'Content-Length' 0;
-	        return 204;
-	     }
-	}
+crossDomain : true,
+xhrFields: {
+    withCredentials: true
+}
 ```
 
-Caso seja apache, talvez seja necessário adicionar estas linhas abaixo ao .htaccess
+Ex.:
+
+```
+$.ajax({
+    type: "GET",
+    dataType: 'json',
+    url: API_ENDPOINT,
+    crossDomain : true,
+    xhrFields: {
+        withCredentials: true
+    }
+})
+.done(function( data ) {
+    console.log(data);
+});
+```
+
+## 6 Bônus
+
+Caso seu servidor seje apache, talvez seja necessário adicionar estas linhas abaixo ao .htaccess
 ```
     <IfModule mod_rewrite.c>
         <IfModule mod_negotiation.c>
