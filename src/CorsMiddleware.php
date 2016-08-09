@@ -46,8 +46,10 @@ class CorsMiddleware
                 return $url['scheme'].'://'.$url['host'];
             }
 
-            if (in_array($url['host'].':'.$url['port'], $permissions)) {
-                return $url['scheme'].'://'.$url['host'].':'.$url['port'];
+            $port = isset($url['port']) ? ':'.$url['port'] : '';
+
+            if (in_array($url['host'].$port, $permissions)) {
+                return $url['scheme'].'://'.$url['host'].':'.$port;
             }
         }
 
