@@ -36,6 +36,10 @@ class CorsMiddleware
         $permissions = Config::get('cors.permissions', ['']);
 
         if ($permissions == '*' || $permissions == ['*']) {
+            if (isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] != '') {
+                return $_SERVER['HTTP_ORIGIN'];
+            }
+
             return '*';
         }
 
