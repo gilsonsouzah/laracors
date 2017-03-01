@@ -11,7 +11,8 @@ class CorsMiddleware
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -28,7 +29,8 @@ class CorsMiddleware
     }
 
     /**
-     * Get cors permissions on config file
+     * Get cors permissions on config file.
+     *
      * @return mixed
      */
     private function getPermission()
@@ -63,7 +65,8 @@ class CorsMiddleware
     }
 
     /**
-     * Get cors methods allowed on config file
+     * Get cors methods allowed on config file.
+     *
      * @return string String of allowed methods separated by comma.
      */
     private function getAllowedMethods()
@@ -74,7 +77,8 @@ class CorsMiddleware
     }
 
     /**
-     * Get cors headers allowed on config file
+     * Get cors headers allowed on config file.
+     *
      * @return string String of allowed headers separated by comma.
      */
     private function getAllowedHeaders()
@@ -86,7 +90,8 @@ class CorsMiddleware
     }
 
     /**
-     * Get cors authentication allowed on config file
+     * Get cors authentication allowed on config file.
+     *
      * @return string State of authentication on cors
      */
     private function getCredentials()
@@ -97,8 +102,10 @@ class CorsMiddleware
     }
 
     /**
-     * Change domain host to star initial subdomain (Allow access to all subdomains)
+     * Change domain host to star initial subdomain (Allow access to all subdomains).
+     *
      * @param $domain string Host to starize
+     *
      * @return string Starized domain
      */
     private function starizeDomain($domain)
