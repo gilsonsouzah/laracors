@@ -42,6 +42,11 @@ class CorsMiddleware
                 return $_SERVER['HTTP_ORIGIN'];
             }
 
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                $url = parse_url($_SERVER['HTTP_REFERER']);
+                return $url['scheme'].'://'.$url['host'];
+            }
+
             return '*';
         }
 
